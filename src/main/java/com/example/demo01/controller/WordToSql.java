@@ -16,7 +16,7 @@ public class WordToSql {
 
 
     public static void readAndWriterTesta4() throws IOException {
-        File file = new File("D:\\chengtianjiliang\\码值\\码值模板(海尔).docx");
+        File file = new File("D:\\chengtianjiliang\\码值\\码值模板格力).docx");
 
         FileInputStream fis = new FileInputStream(file);
         System.out.println("获取到：" + fis);
@@ -47,8 +47,8 @@ public class WordToSql {
         Dao dao = new Dao();
         for (Object contents : datas) {
             String content = contents.toString();
-            System.out.println("第一次获取：" + content.toString());
-            System.out.println("第一步:" + content);
+//            System.out.println("第一次获取：" + content.toString());
+//            System.out.println("第一步:" + content);
             if (content.contains("cmode")) {
 
                 bean.setAir_type("格力");
@@ -83,8 +83,8 @@ public class WordToSql {
             }
             if (content.contains("irdata")) {
                 dao.add(bean);
-            }
 
+            }
         }
 
 
