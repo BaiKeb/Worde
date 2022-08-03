@@ -10,9 +10,11 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
-import java.util.List;
+
+import static com.example.demo01.util.Unicode.unicodeDecode;
+
 
 public class CapuC {
 
@@ -23,14 +25,16 @@ public class CapuC {
 //        3: "温度-"
 //        4: "风速"
 //        5: "风向"
-        getPageContent("https://ir.spgui.com/keyevent.asp?mac=2019072601&keyid=1&kfid=010288", "post", 100500);
+
+
+        getPageContent("https://ir.spgui.com/keyevent.asp?mac=2019072601&keyid=1&kfid=010129", "post", 100500);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        String Url = "https://ir.spgui.com/keyevent.asp?mac=2019072601&keyid=1&kfid=010288";
-        String Url2 = "https://ir.spgui.com/keyevent.asp?mac=2019072601&keyid=2&kfid=010288";
-        String Url4 = "https://ir.spgui.com/keyevent.asp?mac=2019072601&keyid=4&kfid=010288";
-        String Url5 = "https://ir.spgui.com/keyevent.asp?mac=2019072601&keyid=5&kfid=010288";
+        String Url = "https://ir.spgui.com/keyevent.asp?mac=2019072601&keyid=1&kfid=010129";
+        String Url2 = "https://ir.spgui.com/keyevent.asp?mac=2019072601&keyid=2&kfid=010129";
+        String Url4 = "https://ir.spgui.com/keyevent.asp?mac=2019072601&keyid=4&kfid=010129";
+        String Url5 = "https://ir.spgui.com/keyevent.asp?mac=2019072601&keyid=5&kfid=010129";
         String strP = "post";
         int maX = 100500;
 
@@ -102,6 +106,10 @@ public class CapuC {
             rd.close();
             hConnect.disconnect();
 //            System.out.println("输出："+s);
+//            unicodeDecode(s);
+
+//            System.out.println(unicodeDecode(s));
+
             String substring = s.substring(1, s.length() - 1);
 //            System.out.println("substring:"+substring);
             String[] split = substring.split(":");//以逗号分割
@@ -114,14 +122,14 @@ public class CapuC {
                 if (string2.equals("\"\\u5F00\",\"cmode\"")) {
                     System.out.println("cmode:开");
 
-                    bean.setAir_type("美的");
-                    bean.setAir_model("0041");
+                    bean.setAir_type("志高");
+                    bean.setAir_model("0082");
 
                     bean.setAir_open_type("开");
                 } else if (string2.equals("\"\\u5173\",\"cmode\"")) {
                     System.out.println("cmode:关");
-                    bean.setAir_type("美的");
-                    bean.setAir_model("0041");
+                    bean.setAir_type("志高");
+                    bean.setAir_model("0082");
                     bean.setAir_open_type("关");
                 } else if (string2.equals("\"\\u5236\\u51B7\",\"ctemp\"")) {
                     System.out.println("ctemp:制冷");
@@ -210,7 +218,7 @@ public class CapuC {
                 } else if (string2.equals("\"\\u9AD8\\u98CE\",\"cwinddir\"")) {
                     System.out.println("cwind:高风");
                     bean.setWind_speed("高风");
-                } else if (string2.contains("D8,94,99,")) {
+                } else if (string2.contains("4B,A4,A9,")) {
                     System.out.println("irdata:" + string2);
                     String sub = string2.substring(1, string2.length() - 1);
 
@@ -222,7 +230,7 @@ public class CapuC {
                 }
 //                if (string2.equals("\"\\u5F00\",\"cmode\"")) {
 
-                if (string2.contains("D8,94,99,")) {
+                if (string2.contains("4B,A4,A9,")) {
                     dao.add(bean);
 
                 }
